@@ -347,9 +347,11 @@ class PackageTests(unittest.TestCase):
         self.assertIn("shellのプロンプトを待つ", launch)
         self.assertIn("paneとagentに同じ役割名を付ける", launch)
         self.assertIn("自分が作っていないpaneのラベルは変更しない", launch)
-        self.assertIn("default_permissions=\":read-only\"", launch)
         self.assertIn("default_permissions=\":workspace-write\"", launch)
-        self.assertRegex(launch, r"planner / researcher / reviewer \| read-only")
+        self.assertIn("mainのpaneを左40%に残し、右60%を子agentの領域にする", launch)
+        self.assertIn("mainのpaneは再び分割しない", launch)
+        self.assertRegex(launch, r"planner / researcher / reviewer \| `<project>/\.hybrid-conductor/runs/")
+        self.assertIn("共有記録の書き込み担当はmain一名", launch)
         self.assertIn("勝手に選ばずユーザーに確認する", launch)
 
 

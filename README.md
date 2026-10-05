@@ -29,8 +29,9 @@ mainのモデルは変更しません。すべての役割のモデル・effort�
 researcherは必要時だけ起動します。designerはモック作成と実装後の視覚・操作確認を担当します。
 小さなタスクで全役割を強制起動しません。
 
-herdr上では、paneとagentに `hc-worker-core` のような役割名を付け、画面上で担当が分かるようにします。
-planner・researcher・reviewerは読み取り専用、worker・designerは書き込み可能な権限で起動します。
+herdr上では、mainを左40%に残して右60%に子agentを並べ、paneとagentに `hc-worker-core` のような役割名を付けます。
+worker・designerはプロジェクトに書き込めます。planner・researcher・reviewerは製品のファイルを書けず、
+自分のrunディレクトリにだけ報告や実験を書けます。計画や判定は通常テキストで返し、mainが記録します。
 起動テンプレートと既知の注意点は [起動の準備](skills/herdr-adapter/references/launch.md) にあります。
 
 ## 使い始める

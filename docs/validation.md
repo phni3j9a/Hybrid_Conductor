@@ -64,11 +64,16 @@ mainのツール呼び出し47回のうち、約15回が起動まわりの再試
 - `config.toml` の `default_permissions` により `-s workspace-write` が無視され、plannerが全権限で起動した。
   別途 `codex exec -s read-only` だけで起動すると `sandbox: danger-full-access` となり書き込めることも確認した。
   `-c default_permissions=":read-only"` を併用すると、`read-only file system` で書き込みが拒否された。
-  → 権限の上書きを含む役割別テンプレートを追加。reviewerなどは読み取り専用にする。
+  → 権限の上書きを含む役割別テンプレートを追加。
+- planner・researcher・reviewerを製品に書けない状態にする方法を `codex exec` で比較した（製品は `/tmp` の外に置いた）。
+  `:read-only` + `--add-dir <報告先>` は報告先にも書けなかった。`-c permissions.<name>...` でその場で作った権限プロファイルは
+  解釈されず、製品に書き込めた。`:workspace-write` で作業ルートを `<project>/.hybrid-conductor/runs/<run>/` にすると、
+  書き込み範囲は作業ルート・`/tmp`・`$TMPDIR` になり、製品には書けず、runディレクトリには書けた。→ この方式を採用。
 - Codexの未信頼フォルダ確認でstartがblockedになった。`-c projects."<path>".trust_level=...` では回避できず、
   mainが信頼を選んだため `~/.codex/config.toml` に記録が残った（検証後に削除）。→ ユーザーに確認する運用を明記。
 - paneに役割名がなく、画面上で担当が分からなかった。→ `pane rename` で役割名のラベルを付ける運用を追加。
-  ラベルは日本語も使え、agentの終了後も残ることを確認した。
+  ラベルは日本語も使えることを確認した。
+- `pane split --ratio` は分割元のpaneが残す割合だった（幅200で0.6なら元120・新80）。→ mainを左40%に残す配置を既定にした。
 
 ## 実機で残る検証
 
