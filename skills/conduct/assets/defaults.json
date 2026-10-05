@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "roles": {
+    "main": {"agent": "inherit", "model": "inherit", "effort": "inherit"},
+    "planner": {"agent": "codex", "model": "gpt-6-astra", "effort": "high"},
+    "worker": {"agent": "codex", "model": "gpt-6-luna", "effort": "max"},
+    "researcher": {"agent": "codex", "model": "gpt-6-luna", "effort": "max"},
+    "reviewer": {"agent": "codex", "model": "gpt-6.1-sol", "effort": "high"},
+    "designer": {"agent": "claude", "model": "claude-opus-5-5", "effort": "inherit"}
+  },
+  "parallelism": {"workers": 4, "researchers": 8},
+  "execution": {"adapter": "herdr", "allow_worktrees": false}
+}

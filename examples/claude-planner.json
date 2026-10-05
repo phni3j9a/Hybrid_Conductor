@@ -1,0 +1,6 @@
+{
+  "roles": {
+    "planner": {"agent": "claude", "model": "fable", "effort": "high"},
+    "reviewer": {"effort": "max"}
+  }
+}

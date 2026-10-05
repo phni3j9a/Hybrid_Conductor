@@ -1,0 +1,37 @@
+test_empty_guide_rejected (test_package.BootstrapTests.test_empty_guide_rejected) ... ok
+test_guide_print_timeout_is_not_a_session_operation (test_package.BootstrapTests.test_guide_print_timeout_is_not_a_session_operation) ... ok
+test_inside_fixture_gets_guide_once (test_package.BootstrapTests.test_inside_fixture_gets_guide_once) ... ok
+test_invalid_timeout_rejected_without_executing (test_package.BootstrapTests.test_invalid_timeout_rejected_without_executing) ... ok
+test_missing_cli (test_package.BootstrapTests.test_missing_cli) ... ok
+test_non_utf8_guide_rejected (test_package.BootstrapTests.test_non_utf8_guide_rejected) ... ok
+test_outside_context_gets_guide_but_cannot_continue (test_package.BootstrapTests.test_outside_context_gets_guide_but_cannot_continue) ... ok
+test_skill_failure_does_not_fallback (test_package.BootstrapTests.test_skill_failure_does_not_fallback) ... ok
+test_arbitrary_model_and_cross_cli_override (test_package.ConfigTests.test_arbitrary_model_and_cross_cli_override) ... ok
+test_broken_optional_symlink_is_error (test_package.ConfigTests.test_broken_optional_symlink_is_error) ... ok
+test_cli_only_resolves_and_does_not_execute_values (test_package.ConfigTests.test_cli_only_resolves_and_does_not_execute_values) ... ok
+test_defaults (test_package.ConfigTests.test_defaults) ... ok
+test_examples_validate (test_package.ConfigTests.test_examples_validate) ... ok
+test_explicit_missing_file_is_error (test_package.ConfigTests.test_explicit_missing_file_is_error) ... ok
+test_invalid_configuration (test_package.ConfigTests.test_invalid_configuration) ... ok
+test_invalid_lower_layer_is_not_hidden (test_package.ConfigTests.test_invalid_lower_layer_is_not_hidden) ... ok
+test_json_rejects_bad_shape_duplicates_and_constants (test_package.ConfigTests.test_json_rejects_bad_shape_duplicates_and_constants) ... ok
+test_merge_does_not_mutate_inputs (test_package.ConfigTests.test_merge_does_not_mutate_inputs) ... ok
+test_missing_project_is_error (test_package.ConfigTests.test_missing_project_is_error) ... ok
+test_non_git_root_discovery (test_package.ConfigTests.test_non_git_root_discovery) ... ok
+test_optional_files_can_be_absent (test_package.ConfigTests.test_optional_files_can_be_absent) ... ok
+test_precedence_and_partial_merge (test_package.ConfigTests.test_precedence_and_partial_merge) ... ok
+test_project_root_discovery (test_package.ConfigTests.test_project_root_discovery) ... ok
+test_relative_xdg_rejected (test_package.ConfigTests.test_relative_xdg_rejected) ... ok
+test_broken_symlink_never_overwritten (test_package.InstallerTests.test_broken_symlink_never_overwritten) ... ok
+test_existing_directory_never_overwritten (test_package.InstallerTests.test_existing_directory_never_overwritten) ... ok
+test_install_and_idempotence (test_package.InstallerTests.test_install_and_idempotence) ... ok
+test_partial_failure_rolls_back_new_links (test_package.InstallerTests.test_partial_failure_rolls_back_new_links) ... ok
+test_core_policies_are_present (test_package.PackageTests.test_core_policies_are_present) ... ok
+test_manifest_structure (test_package.PackageTests.test_manifest_structure) ... ok
+test_relative_markdown_links (test_package.PackageTests.test_relative_markdown_links) ... ok
+test_two_skill_frontmatters (test_package.PackageTests.test_two_skill_frontmatters) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 12.658s
+
+OK
