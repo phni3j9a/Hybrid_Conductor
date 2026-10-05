@@ -351,7 +351,14 @@ class PackageTests(unittest.TestCase):
         self.assertIn("mainのpaneを左40%に残し、右60%を子agentの領域にする", launch)
         self.assertIn("mainのpaneは再び分割しない", launch)
         self.assertRegex(launch, r"planner / researcher / reviewer \| `<project>/\.hybrid-conductor/runs/")
-        self.assertIn("共有記録の書き込み担当はmain一名", launch)
+        self.assertIn("報告の受け渡し", launch)
+        self.assertIn("runs/<run-id>/agents/<agent名>", launch)
+        workflow = (ROOT / "skills/conduct/references/workflow.md").read_text()
+        self.assertIn("子の返却は既定で報告ファイルにする", workflow)
+        self.assertIn("報告ファイルは上書きしない", workflow)
+        self.assertIn("mainは全文を書き写さず", workflow)
+        self.assertIn("`.hybrid-conductor/` を含めない", workflow)
+        self.assertIn("報告ファイルで受け取る", (ROOT / "skills/herdr-adapter/SKILL.md").read_text())
         self.assertIn("勝手に選ばずユーザーに確認する", launch)
 
 

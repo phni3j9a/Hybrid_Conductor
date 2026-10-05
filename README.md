@@ -31,7 +31,9 @@ researcherは必要時だけ起動します。designerはモック作成と実�
 
 herdr上では、mainを左40%に残して右60%に子agentを並べ、paneとagentに `hc-worker-core` のような役割名を付けます。
 worker・designerはプロジェクトに書き込めます。planner・researcher・reviewerは製品のファイルを書けず、
-自分のrunディレクトリにだけ報告や実験を書けます。計画や判定は通常テキストで返し、mainが記録します。
+自分の報告ディレクトリと一時ディレクトリにだけ書けます。
+各agentの計画・調査・検証結果は `.hybrid-conductor/runs/<run-id>/agents/` の報告ファイルで受け渡し、
+端末には短い要約だけを返させます。mainは全文を書き写さず、パスのまま次の担当へ渡します。
 起動テンプレートと既知の注意点は [起動の準備](skills/herdr-adapter/references/launch.md) にあります。
 
 ## 使い始める
@@ -48,6 +50,15 @@ git clone https://github.com/phni3j9a/Hybrid_Conductor.git "$HOME/src/Hybrid_Con
 ```
 
 以下はこの保存先を使う例です。別の場所へcloneした場合はPluginのパスを読み替えてください。
+
+### 作業対象プロジェクトの準備
+
+checkpointノートや各agentの報告は、作業対象の `.hybrid-conductor/` に保存します。
+commitに含めないよう、`.gitignore` に追加してください。未設定なら、mainが開始時に確認します。
+
+```bash
+echo '.hybrid-conductor/' >> /path/to/your-project/.gitignore
+```
 
 ### Claude Code
 

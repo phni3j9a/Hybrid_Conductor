@@ -34,9 +34,10 @@ agentを起動する直前に読む。herdrの操作構文は複製しない。*
 | 役割 | 作業ルート | 書き込める場所 |
 |---|---|---|
 | worker / designer | プロジェクト | プロジェクト（担当範囲だけ編集する） |
-| planner / researcher / reviewer | `<project>/.hybrid-conductor/runs/<run-id>/<agent名>/` | 自分のrunディレクトリと一時ディレクトリ。製品のファイルは書けない |
+| planner / researcher / reviewer | `<project>/.hybrid-conductor/runs/<run-id>/agents/<agent名>/` | 自分の報告ディレクトリと一時ディレクトリ。製品のファイルは書けない |
 
-後者は「製品は読み取り専用、報告と実験だけ書ける」状態にするため、作業ルートをrunディレクトリに置く。
+後者は「製品は読み取り専用、報告と実験だけ書ける」状態にするため、作業ルートを自分の報告ディレクトリに置く。
+起動前にmainがそのディレクトリを作る。workerとdesignerも、報告は同じ形の自分のディレクトリに書く。
 プロンプトにはプロジェクトの絶対パスを渡す。プロジェクト自体が一時ディレクトリの中にあると製品も書けてしまうので、
 その場合は保護できないことをユーザーへ伝える。
 
@@ -45,11 +46,11 @@ agentを起動する直前に読む。herdrの操作構文は複製しない。*
 
 ## 成果の受け渡し
 
-- **通常は短いテキストで返させる。** mainが導入版の方法（`agent read` など）で読み、要点を自分で記録する。
-  共有記録の書き込み担当はmain一名。plannerの計画はmainがrunの計画ファイルやcheckpointノートへ書き、
-  workerにはそのファイルの絶対パスを渡す。reviewerの判定と指摘もmainが指摘台帳に記録する。
-- **長い報告や、端末から回収しきれない出力**は、各agentに自分のrunディレクトリへ `report.md` などとして書かせ、
-  mainが読む。最初のプロンプトから全員に書かせる必要はない。
+[進行方針](../../conduct/references/workflow.md) の「報告の受け渡し」に従う。herdr上での要点:
+
+- 委任のプロンプトに、タスクIDと報告ファイルの絶対パスを書く。端末には3〜5行の要約だけを返させる。
+- 完了の待機後、`agent read` で要約を読み、報告ファイルの存在とタスクIDを確かめてから本文を読む。
+- plannerの計画やresearcherの調査結果は、mainが書き写さずにパスのまま次の担当へ渡す。
 - **reviewerやresearcherの検証実験**（実装を壊してテストが落ちるかの確認など）は、一時ディレクトリへのコピーで行う。
   製品のファイルを直接変えて試させない。
 
@@ -60,7 +61,7 @@ agentを起動する直前に読む。herdrの操作構文は複製しない。*
 codex -m "<model>" -c 'model_reasoning_effort="<effort>"' \
   -c 'default_permissions=":workspace-write"' -s workspace-write -a never
 # planner / researcher / reviewer: runディレクトリを作業ルートにする
-codex -C "<project>/.hybrid-conductor/runs/<run-id>/<agent名>" -m "<model>" \
+codex -C "<project>/.hybrid-conductor/runs/<run-id>/agents/<agent名>" -m "<model>" \
   -c 'model_reasoning_effort="<effort>"' -c 'default_permissions=":workspace-write"' -s workspace-write -a never
 ```
 

@@ -36,7 +36,8 @@ description: "Hybrid Conductorで複数モデルに計画・実装・調査・�
 
 記録はmainが持つcheckpointノートを中心にする。長い作業ではプロジェクト内の
 `.hybrid-conductor/runs/<run-id>/checkpoint.md` に保存する。関連資料はリンクし、全文を複製しない。
-[ノートのひな型](templates/checkpoint.md) は必要な欄だけ使う。子エージェント全員に管理ファイルを作らせない。
+[ノートのひな型](templates/checkpoint.md) は必要な欄だけ使う。管理ファイルを書くのはmainだけ。
+子の返却は各自の報告ファイルで受け取る（[進行方針](references/workflow.md) の「報告の受け渡し」）。
 
 承認・秘密情報・プロバイダーへの送信範囲は既存のユーザー許可と環境の制御に従う。
 実行環境の制約を迂回せず、別プロバイダーや高価なモデルへ黙って切り替えない。
