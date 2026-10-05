@@ -10,9 +10,10 @@ v0.1.0はherdrの現在のローカルセッションに対応する初版です
 T3 Code、リモートmachine制御、常駐daemon、自動で全処理を走らせるランナーは含めません。
 実際の委任はmainがskillを読み、herdrを操作して実行します。
 
-> **検証範囲:** 構造・設定解決・安全な導入・bootstrapのモックテストを実施。
-> この作成環境にはherdr / Codex / Claude Codeがないため、実機でのagent起動とレビュー運用は未検証です。
-> `herdr --skill` は実行を試みましたが `command not found` でした。
+> **検証範囲:** 構造・設定解決・安全な導入・bootstrapのモックテストに加え、
+> 2026-10-05にherdr 0.9.3 / codex-cli 0.160.0 / Claude Code 2.1.289の実機で、
+> planner → 並列worker → 独立reviewer（修正要求 → 修正 → PASS）までの一連の流れを確認しました。
+> 子として起動するClaude Code（designerなど）と、多くの異常系シナリオは未検証です。
 > [検証記録](docs/validation.md) と [実機シナリオ](tests/scenarios.md) を参照してください。
 
 ## 方針
@@ -27,6 +28,10 @@ mainのモデルは変更しません。すべての役割のモデル・effort�
 
 researcherは必要時だけ起動します。designerはモック作成と実装後の視覚・操作確認を担当します。
 小さなタスクで全役割を強制起動しません。
+
+herdr上では、paneとagentに `hc-worker-core` のような役割名を付け、画面上で担当が分かるようにします。
+planner・researcher・reviewerは読み取り専用、worker・designerは書き込み可能な権限で起動します。
+起動テンプレートと既知の注意点は [起動の準備](skills/herdr-adapter/references/launch.md) にあります。
 
 ## 使い始める
 
@@ -121,7 +126,7 @@ worktreeを許可する場合は `execution.allow_worktrees: true` を明示し�
 ```text
 .claude-plugin/plugin.json       Claude Code用manifest
 skills/conduct/                 共通の入口・方針・設定・ノートひな型
-skills/herdr-adapter/            herdr --skillを読む接続層
+skills/herdr-adapter/            herdr --skillを読む接続層と、起動テンプレート
 scripts/install_codex.py         同じskillをCodexへ安全にリンク
 examples/                       部分的な設定上書き例
 tests/                          自動テストと実機シナリオ

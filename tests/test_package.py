@@ -339,6 +339,18 @@ class PackageTests(unittest.TestCase):
         adapter = (ROOT / "skills/herdr-adapter/SKILL.md").read_text()
         self.assertIn("herdr --skill", adapter)
         self.assertIn("値を自分で設定して条件を偽装しない", adapter)
+        self.assertIn("(references/launch.md)", adapter)
+
+    def test_launch_policies_are_present(self):
+        launch = (ROOT / "skills/herdr-adapter/references/launch.md").read_text()
+        self.assertIn("導入版の `herdr --skill` とhelpが常に優先", launch)
+        self.assertIn("shellのプロンプトを待つ", launch)
+        self.assertIn("paneとagentに同じ役割名を付ける", launch)
+        self.assertIn("自分が作っていないpaneのラベルは変更しない", launch)
+        self.assertIn("default_permissions=\":read-only\"", launch)
+        self.assertIn("default_permissions=\":workspace-write\"", launch)
+        self.assertRegex(launch, r"planner / researcher / reviewer \| read-only")
+        self.assertIn("勝手に選ばずユーザーに確認する", launch)
 
 
 if __name__ == "__main__":
