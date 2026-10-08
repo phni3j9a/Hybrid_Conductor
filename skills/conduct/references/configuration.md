@@ -11,7 +11,10 @@
 | プロジェクト | プロジェクトルートの `.hybrid-conductor.json` |
 | 今回の指定 | 会話での明示指定。再現性が必要なら一時JSONを `--overrides` で読み込む |
 
-設定解決は `scripts/config.py` で行う。Python 3.10以上、標準ライブラリのみ。
+設定解決は `scripts/config.py` で行う。
+起動前は `--check-setup --adapter herdr` を必ず付け、[初回モデル設定](model-setup.md) を確認する。
+通常の解決出力にあるPlugin既定値は推奨候補であり、起動許可ではない。
+Piの子モデルはこの `roles` ではなくnative `agentOverrides` で管理する。Python 3.10以上、標準ライブラリのみ。
 `--project` を省略すると現在のGit作業ツリーのルート、Git外なら現在のディレクトリを使う。
 設定の場所を曖昧にしないため、mainは通常プロジェクトルートを明示する。
 
@@ -26,7 +29,7 @@ python3 /path/to/hybrid-conductor/skills/conduct/scripts/config.py \
 明示された上書きファイルの欠落、無効なJSON、重複キー、不明キーはエラー。
 各層を検証するため、壊れた下位設定を上位設定で覆い隠さない。
 
-## 既定の役割
+## 推奨の役割
 
 | 役割 | CLI | モデル | effort |
 |---|---|---|---|
@@ -67,7 +70,7 @@ mainは要求を提示し、host側の正式なモデル切り替えが必要な
 mainが資源・レート制限・paneの可読性に応じて減らせる。補助スクリプトが枠を強制するわけではない。
 追加reviewerやplannerを常駐させる枠ではなく、必要な時点で起動する。
 
-`execution.adapter` はherdrのみ。`execution.allow_worktrees` は既定false。
+`execution.adapter` はherdr / pi。`execution.allow_worktrees` は既定false。
 trueはユーザーが確認した設定でworktree作成を許可する選択。許可されても必要な場合だけ作る。
 今回の会話で作業場所を明示されたときは、その指定も適用する。
 

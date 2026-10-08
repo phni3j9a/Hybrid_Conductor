@@ -1,0 +1,20 @@
+{
+  "name": "hybrid-conductor",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Mixed-model orchestration policy for Pi and herdr",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "skills": [
+      "./skills/conduct",
+      "./skills/pi-adapter"
+    ],
+    "subagents": {
+      "agents": [
+        "./agents/pi"
+      ]
+    }
+  }
+}

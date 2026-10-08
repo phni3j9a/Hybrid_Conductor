@@ -311,7 +311,7 @@ class PackageTests(unittest.TestCase):
 
     def test_two_skill_frontmatters(self):
         paths = sorted((ROOT / "skills").glob("*/SKILL.md"))
-        self.assertEqual(len(paths), 2)
+        self.assertEqual(len(paths), 3)
         for path in paths:
             text = path.read_text(encoding="utf-8")
             self.assertTrue(text.startswith("---\n"))
