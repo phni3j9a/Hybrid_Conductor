@@ -31,3 +31,18 @@
 
 記録するのは、使われたモデル・effort、成果単位の総費用・所要時間、修正の理由、人間の手戻り。
 単に「呼び出し回数が少ない」を最適化目標にしない。未取得の実効モデルや費用は推定値と区別する。
+
+## Pi / 共通初回セットアップ
+
+| シナリオ | 期待結果 |
+|---|---|
+| native設定なし、親/グローバルdefaultのみ | 全5役割を推奨候補付きで確認。未回答のまま委任しない |
+| Pi Packageを導入 | conduct / pi-adapter、namespace付き全5Agentを発見。herdr-adapterはPi公開対象外 |
+| 5役割を選択し再起動 | native設定を保持し確認を省略。Mainモデルを維持 |
+| herdr旧設定に全5modelあり | 移行確認を要求せず利用。defaultsだけなら初回設定 |
+| thinking未指定 / false / 利用不可max | native既定 / 明示opt-out / 該当役割だけ設定修正。黙って変換しない |
+| Workerの実装後Reviewer起動 | Freshで独立。read/grep/find/lsのみ、必要テストはMainへ要求 |
+| 修正・再レビュー | 最新run IDからResumeし未解決指摘を保持。PASSまで上限なし |
+| Main圧縮 / Pi再起動 | Checkpointを読み対象版・稼働中実行を確認。Resume不可時のみFresh復帰 |
+| 並列Workerが同じファイルを編集 | Mainが直列化。worktreeは明示許可時だけ |
+| タスク完了後の次タスク | 結果/ID記録、次はFresh。履歴を自動削除しない |

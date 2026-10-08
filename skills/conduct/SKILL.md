@@ -10,11 +10,13 @@ description: "Hybrid Conductorで複数モデルに計画・実装・調査・�
 ## 始める
 
 1. 既に決まっている目的・制約・承認済み計画を会話とプロジェクトから読む。聞き直さない。
-2. このskill内の `scripts/config.py` をプロジェクトの作業ディレクトリから実行し、設定を解決する。
-   `python3 <このskillの絶対パス>/scripts/config.py --project <プロジェクトルート>`
-   ファイルは [設定仕様](references/configuration.md) に従う。今回の明示指定を最優先する。
-3. v0.1の実行先はherdrのみ。隣の [herdr-adapter](../herdr-adapter/SKILL.md) を読み、
-   **`herdr --skill`を実行して出力を読む。** 利用不可なら実行可能と装わず、接続上の不足を示す。
+2. 現在の実行基盤を選び、[初回モデル設定](references/model-setup.md) を読む。
+   Pi Mainでは [pi-adapter](../pi-adapter/SKILL.md)、herdrでは
+   [herdr-adapter](../herdr-adapter/SKILL.md) を読み、導入済みの操作仕様を取得する。
+   `scripts/config.py --project <ルート> --adapter <pi|herdr> --check-setup` で確認する。
+   推奨値の解決だけでは設定完了としない。不足時は全5役割を提示し、ユーザーの選択を保存して再確認する。
+3. 今回の明示指定を最優先する。Piの子モデルはnative `agentOverrides`、herdrは `roles` を使う。
+   利用不可なら不足を示し、別モデルへ黙って切り替えない。Mainは現在のモデルを維持する。
 4. [進行方針](references/workflow.md) を読む。委任時は [役割](references/roles.md) の該当部分だけを渡す。
    レビュー時に [レビュー方針](references/review.md) を読む。全資料を全エージェントへ配らない。
 
@@ -37,7 +39,8 @@ description: "Hybrid Conductorで複数モデルに計画・実装・調査・�
 記録はmainが持つcheckpointノートを中心にする。長い作業ではプロジェクト内の
 `.hybrid-conductor/runs/<run-id>/checkpoint.md` に保存する。関連資料はリンクし、全文を複製しない。
 [ノートのひな型](templates/checkpoint.md) は必要な欄だけ使う。管理ファイルを書くのはmainだけ。
-子の返却は各自の報告ファイルで受け取る（[進行方針](references/workflow.md) の「報告の受け渡し」）。
+圧縮・再起動からの復帰とタスク単位のセッション管理は [継続手順](references/sessions.md) に従う。
+子の返却は [進行方針](references/workflow.md) の「報告の受け渡し」に従う。
 
 承認・秘密情報・プロバイダーへの送信範囲は既存のユーザー許可と環境の制御に従う。
 実行環境の制約を迂回せず、別プロバイダーや高価なモデルへ黙って切り替えない。

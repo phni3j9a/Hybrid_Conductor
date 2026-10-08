@@ -22,6 +22,15 @@ Web上の最新版や同梱コピーで導入版の仕様を代用しない。�
 この補助はpaneを作成せず、agentを起動せず、セッションにも接続しない。
 既に出力を読んだ同一実行中に、毎タスクで読み直す必要はない。バイナリ更新後は再取得する。
 
+## 初回モデル設定
+
+[共通セットアップ](../conduct/references/model-setup.md) に従い、委任前に
+`python3 <conduct>/scripts/config.py --project <ルート> --adapter herdr --check-setup` を実行する。
+終了コード3なら委任を開始せず全5役割を提示する。既存設定の各役割に明示modelがあれば再確認不要。
+選択後、既存ユーザー設定の無関係なキーを保って `roles` を保存する。
+保存先は [設定仕様](../conduct/references/configuration.md)。再チェックしてから起動する。
+`defaults.json` だけでは設定済みとしない。modelのみ明示済みならeffortの既定は従来どおり解決する。
+
 ## 共通の役割をherdrへ渡す
 
 1. 現在のcaller、作業場所、セッションを確認し、導入版skillに従ってCLIとserverの対応を確認する。

@@ -1,3 +1,18 @@
+test_cli_setup_status_and_adapter_selection (test_model_setup.ModelSetupTests.test_cli_setup_status_and_adapter_selection) ... ok
+test_existing_complete_herdr_configuration_migrates (test_model_setup.ModelSetupTests.test_existing_complete_herdr_configuration_migrates) ... ok
+test_explicit_selection_equal_to_default_is_still_selection (test_model_setup.ModelSetupTests.test_explicit_selection_equal_to_default_is_still_selection) ... ok
+test_herdr_layers_and_run_override (test_model_setup.ModelSetupTests.test_herdr_layers_and_run_override) ... ok
+test_native_pi_settings_preserved_read_only (test_model_setup.ModelSetupTests.test_native_pi_settings_preserved_read_only) ... ok
+test_partial_settings_require_all_role_setup (test_model_setup.ModelSetupTests.test_partial_settings_require_all_role_setup) ... ok
+test_pi_disabled_role_is_not_ready (test_model_setup.ModelSetupTests.test_pi_disabled_role_is_not_ready) ... ok
+test_pi_full_setup_and_optional_thinking (test_model_setup.ModelSetupTests.test_pi_full_setup_and_optional_thinking) ... ok
+test_pi_ignores_herdr_models_global_defaults_and_unqualified_names (test_model_setup.ModelSetupTests.test_pi_ignores_herdr_models_global_defaults_and_unqualified_names) ... ok
+test_pi_invalid_fields_and_lower_layer_not_hidden (test_model_setup.ModelSetupTests.test_pi_invalid_fields_and_lower_layer_not_hidden) ... ok
+test_pi_package_exposes_only_native_skills (test_model_setup.ModelSetupTests.test_pi_package_exposes_only_native_skills) ... ok
+test_pi_project_precedence_preserves_user_fields (test_model_setup.ModelSetupTests.test_pi_project_precedence_preserves_user_fields) ... ok
+test_pi_settings_bad_shapes (test_model_setup.ModelSetupTests.test_pi_settings_bad_shapes) ... ok
+test_pi_thinking_false_is_native_opt_out (test_model_setup.ModelSetupTests.test_pi_thinking_false_is_native_opt_out) ... ok
+test_recommendations_do_not_complete_setup (test_model_setup.ModelSetupTests.test_recommendations_do_not_complete_setup) ... ok
 test_empty_guide_rejected (test_package.BootstrapTests.test_empty_guide_rejected) ... ok
 test_guide_print_timeout_is_not_a_session_operation (test_package.BootstrapTests.test_guide_print_timeout_is_not_a_session_operation) ... ok
 test_inside_fixture_gets_guide_once (test_package.BootstrapTests.test_inside_fixture_gets_guide_once) ... ok
@@ -27,11 +42,12 @@ test_existing_directory_never_overwritten (test_package.InstallerTests.test_exis
 test_install_and_idempotence (test_package.InstallerTests.test_install_and_idempotence) ... ok
 test_partial_failure_rolls_back_new_links (test_package.InstallerTests.test_partial_failure_rolls_back_new_links) ... ok
 test_core_policies_are_present (test_package.PackageTests.test_core_policies_are_present) ... ok
+test_launch_policies_are_present (test_package.PackageTests.test_launch_policies_are_present) ... ok
 test_manifest_structure (test_package.PackageTests.test_manifest_structure) ... ok
 test_relative_markdown_links (test_package.PackageTests.test_relative_markdown_links) ... ok
 test_two_skill_frontmatters (test_package.PackageTests.test_two_skill_frontmatters) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 12.658s
+Ran 48 tests in 0.646s
 
 OK

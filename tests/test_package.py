@@ -311,7 +311,7 @@ class PackageTests(unittest.TestCase):
 
     def test_two_skill_frontmatters(self):
         paths = sorted((ROOT / "skills").glob("*/SKILL.md"))
-        self.assertEqual(len(paths), 2)
+        self.assertEqual(len(paths), 3)
         for path in paths:
             text = path.read_text(encoding="utf-8")
             self.assertTrue(text.startswith("---\n"))
@@ -354,7 +354,7 @@ class PackageTests(unittest.TestCase):
         self.assertIn("報告の受け渡し", launch)
         self.assertIn("runs/<run-id>/agents/<agent名>", launch)
         workflow = (ROOT / "skills/conduct/references/workflow.md").read_text()
-        self.assertIn("子の返却は既定で報告ファイルにする", workflow)
+        self.assertIn("子の返却を既定で報告ファイルにする", workflow)
         self.assertIn("報告ファイルは上書きしない", workflow)
         self.assertIn("mainは全文を書き写さず", workflow)
         self.assertIn("`.hybrid-conductor/` を含めない", workflow)
