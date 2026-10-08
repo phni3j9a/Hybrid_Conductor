@@ -339,6 +339,27 @@ class PackageTests(unittest.TestCase):
         adapter = (ROOT / "skills/herdr-adapter/SKILL.md").read_text()
         self.assertIn("herdr --skill", adapter)
         self.assertIn("値を自分で設定して条件を偽装しない", adapter)
+        self.assertIn("(references/launch.md)", adapter)
+
+    def test_launch_policies_are_present(self):
+        launch = (ROOT / "skills/herdr-adapter/references/launch.md").read_text()
+        self.assertIn("導入版の `herdr --skill` とhelpが常に優先", launch)
+        self.assertIn("shellのプロンプトを待つ", launch)
+        self.assertIn("paneとagentに同じ役割名を付ける", launch)
+        self.assertIn("自分が作っていないpaneのラベルは変更しない", launch)
+        self.assertIn("default_permissions=\":workspace-write\"", launch)
+        self.assertIn("mainのpaneを左40%に残し、右60%を子agentの領域にする", launch)
+        self.assertIn("mainのpaneは再び分割しない", launch)
+        self.assertRegex(launch, r"planner / researcher / reviewer \| `<project>/\.hybrid-conductor/runs/")
+        self.assertIn("報告の受け渡し", launch)
+        self.assertIn("runs/<run-id>/agents/<agent名>", launch)
+        workflow = (ROOT / "skills/conduct/references/workflow.md").read_text()
+        self.assertIn("子の返却を既定で報告ファイルにする", workflow)
+        self.assertIn("報告ファイルは上書きしない", workflow)
+        self.assertIn("mainは全文を書き写さず", workflow)
+        self.assertIn("`.hybrid-conductor/` を含めない", workflow)
+        self.assertIn("報告ファイルで受け取る", (ROOT / "skills/herdr-adapter/SKILL.md").read_text())
+        self.assertIn("勝手に選ばずユーザーに確認する", launch)
 
 
 if __name__ == "__main__":

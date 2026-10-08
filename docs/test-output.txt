@@ -42,11 +42,12 @@ test_existing_directory_never_overwritten (test_package.InstallerTests.test_exis
 test_install_and_idempotence (test_package.InstallerTests.test_install_and_idempotence) ... ok
 test_partial_failure_rolls_back_new_links (test_package.InstallerTests.test_partial_failure_rolls_back_new_links) ... ok
 test_core_policies_are_present (test_package.PackageTests.test_core_policies_are_present) ... ok
+test_launch_policies_are_present (test_package.PackageTests.test_launch_policies_are_present) ... ok
 test_manifest_structure (test_package.PackageTests.test_manifest_structure) ... ok
 test_relative_markdown_links (test_package.PackageTests.test_relative_markdown_links) ... ok
 test_two_skill_frontmatters (test_package.PackageTests.test_two_skill_frontmatters) ... ok
 
 ----------------------------------------------------------------------
-Ran 47 tests in 0.613s
+Ran 48 tests in 0.646s
 
 OK
