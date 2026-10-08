@@ -1,6 +1,12 @@
 {
   "name": "hybrid-conductor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "herdr上のCodexとClaude Codeを役割別に使い分ける、軽量な委任・独立レビュー方針。",
-  "keywords": ["herdr", "codex", "claude-code", "orchestration", "review"]
+  "keywords": [
+    "herdr",
+    "codex",
+    "claude-code",
+    "orchestration",
+    "review"
+  ]
 }

@@ -2,22 +2,22 @@
 
 **強いplanner、安価な並列worker、成果単位の独立レビュー。**
 
-herdr上でCodexとClaude Codeを役割別に使い分ける、skill中心のPluginです。
+Piまたはherdrで複数モデルを役割別に使い分ける、skill中心のPluginです。
 新しいエージェント実行基盤やherdr本体の拡張ではありません。
 Claude CodeにはPluginとして、Codexには同じ2つのskillをローカル登録して利用します。
 
-v0.1.0はherdrの現在のローカルセッションに対応する初版です。
+v0.2.0はPi Main + pi-subagentsとherdrの現在のローカルセッションに対応します。
 T3 Code、リモートmachine制御、常駐daemon、自動で全処理を走らせるランナーは含めません。
-実際の委任はmainがskillを読み、herdrを操作して実行します。
+実際の委任はmainがskillを読み、選択したAdapterの実行基盤を操作します。
 
-> **検証範囲:** 構造・設定解決・安全な導入・bootstrapのモックテストを実施。
-> この作成環境にはherdr / Codex / Claude Codeがないため、実機でのagent起動とレビュー運用は未検証です。
-> `herdr --skill` は実行を試みましたが `command not found` でした。
+> **検証範囲:** 構造・設定・導入・bootstrapの自動テストを実施。
+> 認証済みPi/herdrでの子Agent起動とレビュー運用は未検証です。
 > [検証記録](docs/validation.md) と [実機シナリオ](tests/scenarios.md) を参照してください。
 
 ## 方針
 
-計画はAstra、実装・必要時の調査はLuna max、独立レビューはSol、デザインはClaude系を既定にします。
+推奨は計画にAstra、実装・必要時の調査にLuna max、独立レビューにSol、デザインにClaude Opus系です。
+初回は全5役割を明示設定します。推奨値をそのまま自動採用しません。
 mainのモデルは変更しません。すべての役割のモデル・effortは設定で変更できます。
 
 レビューはworkerのタスクごとではなく、機能として評価できるcheckpointで行います。
@@ -30,7 +30,8 @@ researcherは必要時だけ起動します。designerはモック作成と実�
 
 ## 使い始める
 
-必要なもの: herdr内で起動したmain、使用するCodex / Claude CodeのCLIと認証。
+herdrの場合: herdr内で起動したmain、使用するCodex / Claude CodeのCLIと認証。
+Piの場合: Piとpi-subagents、役割ごとに選択したモデルの認証。下のPi導入手順を参照してください。
 補助スクリプトにはPython 3.10以上が必要です。外部Pythonパッケージは不要です。
 記載のshellとsymlink導入例はmacOS / Linux / WSL向けです。
 
@@ -108,7 +109,7 @@ $conduct プロフィール編集機能を実装してください
 
 ```bash
 python3 "$HOME/src/Hybrid_Conductor/skills/conduct/scripts/config.py" \
-  --project /path/to/your-project
+  --project /path/to/your-project --adapter herdr --check-setup
 ```
 
 並列の既定枠はworker 4、researcher 8。目安として設定可能で、常時全枠を使う指示ではありません。
@@ -122,6 +123,9 @@ worktreeを許可する場合は `execution.allow_worktrees: true` を明示し�
 .claude-plugin/plugin.json       Claude Code用manifest
 skills/conduct/                 共通の入口・方針・設定・ノートひな型
 skills/herdr-adapter/            herdr --skillを読む接続層
+skills/pi-adapter/               Pi Nativeの接続層
+agents/pi/                      Pi専用の5役割
+package.json                    Pi Package manifest
 scripts/install_codex.py         同じskillをCodexへ安全にリンク
 examples/                       部分的な設定上書き例
 tests/                          自動テストと実機シナリオ
@@ -162,3 +166,24 @@ bootstrapは `herdr --skill` の出力と環境を確認するだけです。
 [役割](skills/conduct/references/roles.md) ·
 [herdr接続](skills/herdr-adapter/SKILL.md) ·
 [公式仕様と確認範囲](docs/sources.md)
+
+## Pi Mainで使う
+
+```bash
+pi install npm:pi-subagents
+pi install git:github.com/phni3j9a/Hybrid_Conductor
+```
+
+Piへ公開するSkillはconductとpi-adapterのみ。専用Agentは
+`hybrid-conductor.planner/worker/reviewer/researcher/designer`。
+初回は全5役割の推奨モデルを提示し、native `subagents.agentOverrides` に明示設定する。
+herdrも同じ初回確認を行い、既存configの `roles` に保存する。Mainのモデルは維持する。
+既存設定が全役割を明示していれば再設定は不要。推奨既定値だけでは設定済みにならない。
+
+Pi Agentは初回Fresh、同じ仕事の続きはResume。Checkpointを正本として再起動から復帰する。
+Reviewerは読み取りツールのみで独立確認し、修正・再レビューに回数上限を設けない。
+詳しくは [Pi adapter](skills/pi-adapter/SKILL.md)、
+[モデル設定](skills/conduct/references/model-setup.md)、
+[継続手順](skills/conduct/references/sessions.md) を参照。
+
+この変更の自動テストは設定・パッケージの検証。認証済みPi/herdrでの実行検証は別途必要。

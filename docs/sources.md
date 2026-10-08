@@ -36,3 +36,11 @@ Codexにはローカルskillとして登録する形を同梱し、Codex用Plugi
 役割分担、checkpoint単位の独立レビュー、上限なしの修正ループ、既定の並列枠はユーザーとの合意に基づく。
 それらがベンダーによって最適と保証された値や運用方法であるとは主張しない。
 モックテストは安全確認と補助処理の検証であり、モデルの収束性や出力品質のベンチマークではない。
+
+## Pi対応（2026-10-08）
+
+- [pi-subagents Agent仕様](https://github.com/nicobailon/pi-subagents/blob/main/docs/agents.md): namespace、package manifest、context flags、tools、extensions。
+- [モデル設定](https://github.com/nicobailon/pi-subagents/blob/main/docs/models.md): native agentOverrides、thinking任意/false。
+- [実行API](https://github.com/nicobailon/pi-subagents/blob/main/docs/tool-reference.md): guide/list/models/status/resume、最新run IDとworkflow継続制約。
+- ソース照合・parser確認はcommit `0c33ec7cb26ed1db270d72e746c3c975be880aeb`。
+  導入版のguideを実行時の操作仕様として優先する。
